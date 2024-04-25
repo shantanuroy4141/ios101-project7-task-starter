@@ -10,15 +10,28 @@ struct Task: Codable {
     var note: String?
     var dueDate: Date
     var isComplete: Bool = false
-    private(set) var completedDate: Date?
+    var completedDate: Date?
     let createdDate: Date
     let id: String
 
-    // Custom initializer to set default values
-    init(title: String, note: String? = nil, dueDate: Date = Date(), createdDate: Date = Date(), id: String = UUID().uuidString) {
+    // Default initializer for new tasks
+    init(title: String, note: String? = nil, dueDate: Date = Date(), isComplete: Bool = false) {
         self.title = title
         self.note = note
         self.dueDate = dueDate
+        self.isComplete = isComplete
+        self.completedDate = nil
+        self.createdDate = Date()
+        self.id = UUID().uuidString
+    }
+    
+    // Initializer for updating existing tasks with a specified completedDate and id
+    init(title: String, note: String?, dueDate: Date, isComplete: Bool, completedDate: Date?, createdDate: Date, id: String) {
+        self.title = title
+        self.note = note
+        self.dueDate = dueDate
+        self.isComplete = isComplete
+        self.completedDate = completedDate
         self.createdDate = createdDate
         self.id = id
     }
